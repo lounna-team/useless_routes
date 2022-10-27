@@ -8,11 +8,13 @@ module UselessRoutes
     
     def call
       load_everything!
-      routes_without_views
-      puts routes_without_views.size
-      puts "######################"
-      routes_without_actions
-      puts routes_without_actions.size
+      puts "\n"
+      puts "You have #{routes_without_views.size} #{'route'.pluralize(routes_without_views.size)} without #{'view'.pluralize(routes_without_views.size)} :".colorize(:green)
+      display_routes_without_views
+      puts "\n"
+      puts "You have #{routes_without_actions.size} #{'route'.pluralize(routes_without_views.size)} without #{'action'.pluralize(routes_without_views.size)} :".colorize(:green)
+      display_routes_without_actions
+      puts "\n"
     end
     
     def load_everything!
@@ -22,26 +24,32 @@ module UselessRoutes
       ::Rails::MailersController rescue NameError
       Rails::Engine.subclasses.each(&:eager_load!)
     end
+
+    def display_routes_without_views
+      routes_without_views.each do |route|
+        puts route.colorize(:yellow)
+      end
+    end
+
+    def display_routes_without_actions
+      routes_without_actions.each do |route|
+        puts route.colorize(:yellow)
+      end
+    end
     
     def routes_without_views
-      puts "Routes without views : "
-      get_routes.map do |route|
-        "#{Rails.root}/app/views/#{route.requirements[:controller]}/#{route.requirements[:action]}"
+      @routes_without_views ||= get_routes.map do |route|
+        "#{route.requirements[:controller]}/#{route.requirements[:action]}"
       end.reject! {|r| r.include?('rails/') || r.include?('active_storage') || r.include?('action_mailbox')}.reject! do |route|
-        views.include? route
-      end.each do |route|
-        puts route
+        views.include?  "#{Rails.root}/app/views/#{route}"
       end
     end
     
     def routes_without_actions
-      puts "Routes without actions : "
-      get_routes.map do |route|
+      @routes_without_actions ||= get_routes.map do |route|
         "#{route.requirements[:controller]}##{route.requirements[:action]}"
       end.reject {|r| r.start_with? 'rails/'}.reject! do |route|
         actions.include? route
-      end.each do |route|
-        puts route
       end
     end
     
