@@ -3,7 +3,7 @@ require_relative "lib/useless_routes/version"
 Gem::Specification.new do |spec|
   spec.name        = "useless_routes"
   spec.version     = UselessRoutes::VERSION
-  spec.authors     = ["Martin-hoggo"]
+  spec.authors     = ["MartinFesneau", "rhaddad5", "HADDADSOHAIB"]
   spec.email       = ["86001610+Martin-hoggo@users.noreply.github.com"]
   spec.homepage    = "http://www.hoggo.com"
   spec.summary     = "Summary of UselessRoutes."

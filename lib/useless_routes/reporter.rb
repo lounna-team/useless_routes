@@ -9,8 +9,10 @@ module UselessRoutes
     def call
       load_everything!
       routes_without_views
+      puts routes_without_views.size
       puts "######################"
       routes_without_actions
+      puts routes_without_actions.size
     end
     
     def load_everything!
