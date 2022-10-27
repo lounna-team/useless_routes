@@ -15,6 +15,7 @@ module UselessRoutes
       puts "You have #{routes_without_actions.size} #{'route'.pluralize(routes_without_views.size)} without #{'action'.pluralize(routes_without_views.size)} :".colorize(:green)
       display_routes_without_actions
       puts "\n"
+      report
     end
     
     def load_everything!
@@ -73,6 +74,11 @@ module UselessRoutes
           "#{controller.controller_path}##{action}"
         end
       end.flatten.reject {|r| r.start_with? 'rails/'}
+    end
+    
+    def report
+      puts "#{'Route'.pluralize(routes_without_views.size)} without #{'view'.pluralize(routes_without_views.size)} : #{routes_without_views.size} ".colorize(:green)
+      puts "#{'Route'.pluralize(routes_without_views.size)} without #{'action'.pluralize(routes_without_views.size)} : #{routes_without_actions.size}".colorize(:green)
     end
   end
 end
