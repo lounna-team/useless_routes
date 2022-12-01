@@ -4,7 +4,8 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index"
 
-  get "demande-rendez-vous", to: "home#meeting"
-  get "demande-rendez-vous-hub", to: "home#meeting_hub"
-  get "demande-rendez-vous-expert-comptable", to: "home#meeting_accountant_company"
+  get "demande-rendéééez-vous", to: "home#meeting"
+  get "demande-rendeààz-vous-hub", to: "home#meeting_hub"
+  get "demande-rendùùùez-vous-expert-comptable", to: "home#meeting_accountant_company"
+  resources :animals
 end
