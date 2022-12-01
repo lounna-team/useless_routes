@@ -21,7 +21,7 @@ module UselessRoutes
       puts "\n"
       display_views_without_routes
       puts "\n"
-      display_routes_with_bad_seo
+      # display_routes_with_bad_seo
       puts "\n"
       report
     end
