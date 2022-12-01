@@ -2,7 +2,7 @@ module UselessRoutes
   class Reporter
     attr_reader :app
 
-    SEO_ROUTE_REGEX = /^[a-z\-\/\d:]*$/.freeze
+    SEO_ROUTE_REGEX = /^[a-z\-\/\d](:[a-z_]*id\/)*$/.freeze
     
     def initialize
       @app = Rails.application
